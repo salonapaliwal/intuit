@@ -17,10 +17,16 @@ public class ScoreService implements  ScoreRepository {
     @Override
     @Transactional
     public List<Score> getTop5Scores() {
-        String jpql = "SELECT s FROM Score s ORDER BY s.score DESC";
-        TypedQuery<Score> query = entityManager.createQuery(jpql, Score.class);
-        query.setMaxResults(5);
-        return query.getResultList();
+        try {
+            String jpql = "SELECT s FROM Score s ORDER BY s.score DESC";
+            TypedQuery<Score> query = entityManager.createQuery(jpql, Score.class);
+            query.setMaxResults(5);
+            return query.getResultList();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return List.<Score>of();
     }
 
     @Override
