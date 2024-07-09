@@ -10,15 +10,15 @@ import java.util.List;
 public class ScoreController {
 
     @Autowired
-    private ScoreService scoreService;
+    private ScoreRepository scoreRepository;
 
     @GetMapping("/top5")
     public List<Score> getTop5Scores() {
-        return scoreService.getTop5Scores();
+        return scoreRepository.getTop5Scores();
     }
 
     @PostMapping
     public Score addScore(@RequestBody Score score) {
-        return scoreService.addScore(score);
+        return scoreRepository.addScore(score);
     }
 }

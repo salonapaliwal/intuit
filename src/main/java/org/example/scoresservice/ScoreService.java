@@ -9,11 +9,12 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Service
-public class ScoreService {
+public class ScoreService implements  ScoreRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
     @Transactional
     public List<Score> getTop5Scores() {
         String jpql = "SELECT s FROM Score s ORDER BY s.score DESC";
@@ -22,6 +23,7 @@ public class ScoreService {
         return query.getResultList();
     }
 
+    @Override
     @Transactional
     public Score addScore(Score score) {
         entityManager.persist(score);
